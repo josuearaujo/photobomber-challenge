@@ -19,6 +19,18 @@
                                     Dashboard
                                 </BreezeNavLink>
                             </div>
+
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <BreezeNavLink :href="route('photo.index')" :active="route().current('photo.index')">
+                                    Gallery
+                                </BreezeNavLink>
+                            </div>
+
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <BreezeNavLink :href="route('photobook.index')" :active="route().current('photobook.index')">
+                                    Photobook
+                                </BreezeNavLink>
+                            </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
