@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\UploadPhotoController;
 use App\Http\Controllers\PhotoController;
-use App\Http\Controllers\PhotobookController;
+use App\Http\Controllers\AlbumController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/photos/{id}', [PhotoController::class, 'show'])->name('photo.show');
     Route::delete('/photos/{id}', [PhotoController::class, 'destroy'])->name('photo.destroy');
 
-    Route::get('/photobooks', [PhotobookController::class, 'index'])->name('photobook.index');
+    Route::get('/photobooks', [AlbumController::class, 'index'])->name('photobook.index');
 });
 
 require __DIR__ . '/auth.php';
