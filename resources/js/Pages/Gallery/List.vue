@@ -14,8 +14,8 @@
                     <div class="p-6 bg-white border-b border-gray-200">
                         List all photos! {{ photoCount }}
 
-                        <div class="grid grid-cols-3 gap-4">
-                            <ImageSquare imgSrc="/photos/9"/>
+                        <div class="grid grid-cols-3 gap-2">
+                            <ImageSquare imgSrc="/photos/10"/>
                             <ImageSquare imgSrc="/photos/13"/>
                             <ImageSquare imgSrc="/photos/8"/>
 

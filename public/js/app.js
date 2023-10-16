@@ -16959,7 +16959,16 @@ __webpack_require__.r(__webpack_exports__);
     var __expose = _ref.expose;
     __expose();
     var onLoadImg = function onLoadImg(e) {
-      console.log('Carregou!', e.currentTarget, e.returnValue, e.target, e);
+      var image = e.currentTarget;
+      var height = image.naturalHeight;
+      var width = image.naturalWidth;
+      if (height > width) {
+        image.classList.add('h-[100%]');
+        image.classList.remove('w-[100%]');
+      } else {
+        image.classList.add('w-[100%]');
+        image.classList.remove('h-[100%]');
+      }
     };
     var __returned__ = {
       onLoadImg: onLoadImg
@@ -17827,13 +17836,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "w-[360px] h-[360px] p-5 text-center"
+  "class": "w-[360px] h-[360px] flex justify-center align-center"
 };
 var _hoisted_2 = ["src"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     src: $props.imgSrc,
-    "class": "h-[100%]",
+    "class": "h-[100%] object-contain",
     onLoad: $setup.onLoadImg
   }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_2)]);
 }
@@ -18820,7 +18829,7 @@ var _hoisted_5 = {
   "class": "p-6 bg-white border-b border-gray-200"
 };
 var _hoisted_6 = {
-  "class": "grid grid-cols-3 gap-4"
+  "class": "grid grid-cols-3 gap-2"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Head"], {
@@ -18831,7 +18840,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" List all photos! " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.photoCount) + " ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ImageSquare"], {
-        imgSrc: "/photos/9"
+        imgSrc: "/photos/10"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ImageSquare"], {
         imgSrc: "/photos/13"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ImageSquare"], {
