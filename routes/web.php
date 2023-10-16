@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\UploadPhotoController;
+use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\PhotobookController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -31,6 +33,11 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/photos', UploadPhotoController::class);
+    Route::get('/photos', [PhotoController::class, 'index'])->name('photo.index');
+    Route::get('/photos/{id}', [PhotoController::class, 'show'])->name('photo.show');
+    Route::delete('/photos/{id}', [PhotoController::class, 'destroy'])->name('photo.destroy');
+
+    Route::get('/photobooks', [PhotobookController::class, 'index'])->name('photobook.index');
 });
 
 require __DIR__ . '/auth.php';

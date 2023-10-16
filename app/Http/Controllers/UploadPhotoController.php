@@ -13,7 +13,7 @@ class UploadPhotoController extends Controller
         /** @var User $user */
         $user = $request->user();
 
-        $path = $request->file('photo')->store('photos');
+        $path = $request->file('photo')->store("$user->id/photos");
 
         return $user->photos()->create(['path' => $path]);
     }
