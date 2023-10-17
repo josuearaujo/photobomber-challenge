@@ -49,7 +49,7 @@
     import { ref} from "vue";
 
     const fileInputRef = ref(null);
-    const props = defineProps({ photos: Array, photoCount: Number, token: String });
+    const props = defineProps({ photos: Array, token: String });
 
     axios.defaults.headers.common['Authorization'] = `Bearer ${props.token}`;
 

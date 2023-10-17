@@ -17570,7 +17570,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   __name: 'List',
   props: {
     photos: Array,
-    photoCount: Number,
     token: String
   },
   setup: function setup(__props, _ref) {

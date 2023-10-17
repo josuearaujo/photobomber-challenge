@@ -18,7 +18,6 @@ class PhotoController extends Controller
 
         return Inertia::render('Gallery/List', [
             'photos' => $photos,
-            'photoCount' => $photos->count(),
             'token' => $token->plainTextToken
         ]);
     }
