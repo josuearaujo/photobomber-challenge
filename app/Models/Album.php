@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Album
@@ -14,19 +16,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property string $title
  * @property string|null $description
  * @property int $user_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property-read int|null $photos_count
  * @method static \Database\Factories\AlbumFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|Album newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Album newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Album query()
- * @method static \Illuminate\Database\Eloquent\Builder|Album whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Album whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Album whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Album whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Album whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Album whereUserId($value)
+ * @method static Builder|Album newModelQuery()
+ * @method static Builder|Album newQuery()
+ * @method static Builder|Album query()
+ * @method static Builder|Album whereCreatedAt($value)
+ * @method static Builder|Album whereDescription($value)
+ * @method static Builder|Album whereId($value)
+ * @method static Builder|Album whereTitle($value)
+ * @method static Builder|Album whereUpdatedAt($value)
+ * @method static Builder|Album whereUserId($value)
  * @mixin \Eloquent
  */
 class Album extends Model
