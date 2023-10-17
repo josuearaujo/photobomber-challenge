@@ -12,9 +12,10 @@ class PhotoController extends Controller
 {
     public function index(): Response
     {
-        $token = auth()->user()->createToken('all');
+        $user = auth()->user();
+        $token = $user->createToken('all');
 
-        $photos = Photo::whereUserId(auth()->user()->id)->orderByDesc('created_at')->get();
+        $photos = Photo::whereUserId($user->id)->orderByDesc('created_at')->get();
 
         return Inertia::render('Gallery/List', [
             'photos' => $photos,
