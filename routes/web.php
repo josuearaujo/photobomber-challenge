@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\UploadPhotoController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\AlbumController;
 use Illuminate\Foundation\Application;
@@ -32,10 +31,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::post('/photos', UploadPhotoController::class);
     Route::get('/photos', [PhotoController::class, 'index'])->name('photo.index');
     Route::get('/photos/{id}', [PhotoController::class, 'show'])->name('photo.show');
-    Route::delete('/photos/{id}', [PhotoController::class, 'destroy'])->name('photo.destroy');
 
     Route::get('/photobooks', [AlbumController::class, 'index'])->name('photobook.index');
 });

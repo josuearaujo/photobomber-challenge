@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AlbumCompilationWebhookController;
+use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\UploadPhotoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/photos', UploadPhotoController::class);
+    Route::delete('/photos/{id}', [PhotoController::class, 'destroy'])->name('photo.destroy');
 });
 
 Route::post('/webhooks/compilation', AlbumCompilationWebhookController::class);
