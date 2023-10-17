@@ -20,6 +20,10 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Photobomber',
                 'email' => 'photobomber@icastgo.com',
             ]);
+            User::factory()->createOne([
+                'name' => 'Test User',
+                'email' => 'test@icastgo.com',
+            ]);
         } catch (Throwable $exception) {
         }
     }
