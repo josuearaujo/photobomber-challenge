@@ -27,7 +27,8 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+
+    return Inertia::render('Dashboard', );
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -35,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/photos/{id}', [PhotoController::class, 'show'])->name('photo.show');
 
     Route::get('/photobooks', [AlbumController::class, 'index'])->name('photobook.index');
+    Route::post('/photobooks', [AlbumController::class, 'store'])->name('photobook.store');
+    Route::get('/photobooks/{id}', [AlbumController::class, 'show'])->name('photobook.show');
 });
 
 require __DIR__ . '/auth.php';
