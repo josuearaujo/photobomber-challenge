@@ -34,8 +34,6 @@
 <script setup>
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue'
 import { Head } from '@inertiajs/vue3';
-import Gallery from './Gallery/List';
-import Photobook from './Photobook/List';
 
 import { useForm } from '@inertiajs/vue3'
 
