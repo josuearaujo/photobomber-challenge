@@ -12,28 +12,32 @@ class PhotoController extends Controller
 {
     public function index(): Response
     {
-        $photos = Photo::whereUserId(auth()->user()->id)->get();
+        $token = auth()->user()->createToken('all');
+
+        $photos = Photo::whereUserId(auth()->user()->id)->orderByDesc('created_at')->get();
 
         return Inertia::render('Gallery/List', [
             'photos' => $photos,
             'photoCount' => $photos->count(),
+            'token' => $token->plainTextToken
         ]);
     }
 
-    public function show($id): BinaryFileResponse
+    public function show(int $id): BinaryFileResponse
     {
-        $photo = Photo::where($id);
+        $photo = Photo::whereId($id)->first();
 
         $filePath = Storage::path($photo->path);
 
         return response()->file($filePath);
     }
 
-    public function destroy($id): Response
+    public function destroy(int $id): Response
     {
-        $photo = Photo::where($id);
+        $photo = Photo::whereId($id)->first();
 
         Storage::delete($photo->path);
+        $photo->delete();
 
         $photos = Photo::whereUserId(auth()->user()->id)->get();
 
