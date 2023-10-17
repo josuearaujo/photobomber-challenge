@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class UploadPhotoController extends Controller
 {
@@ -13,7 +12,7 @@ class UploadPhotoController extends Controller
         /** @var User $user */
         $user = $request->user();
 
-        $path = $request->file('photo')->store("$user->id/photos");
+        $path = $request->file('photo')->store("photos/$user->id");
 
         return $user->photos()->create(['path' => $path]);
     }
