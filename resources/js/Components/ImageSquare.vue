@@ -1,5 +1,5 @@
 <template>
-    <div class="relative w-[100%] max-h-[360px] flex items-center justify-center bg-slate-50
+    <div class="relative w-[100%] max-w-[360px] max-h-[360px] flex items-center justify-center bg-slate-50
         p-2 border-2 border-white hover:border-gray-300 hover:duration-1000 rounded-md"
         @mouseover="hover=true" @mouseleave="hover=false"
     >
@@ -10,7 +10,7 @@
             </svg>
         </div>
 
-        <img :src="'photos/'+imgId" class="object-cover max-h-[100%]" :class="hover ? 'opacity-50' : ''"/>
+        <img :src="'/photos/'+imgId" class="object-cover max-h-[100%]" :class="hover ? 'opacity-50' : ''" alt=""/>
     </div>
 </template>
 
