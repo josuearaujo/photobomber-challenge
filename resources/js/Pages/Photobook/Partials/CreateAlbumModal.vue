@@ -12,7 +12,7 @@
                             <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                                 <DialogTitle as="h3" class="text-base font-semibold leading-6 text-gray-900">Create album</DialogTitle>
                                 <div class="container mx-auto p-6">
-                                    <form @submit="submitForm">
+                                    <form @submit.prevent="submitForm">
                                         <div class="mb-4">
                                             <label for="title" class="block text-gray-600">Title</label>
                                             <input
@@ -21,7 +21,7 @@
                                                 id="title"
                                                 name="title"
                                                 class="w-full px-3 py-2 border border-gray-300 rounded-md"
-
+                                                required
                                                 maxlength="50"
                                             />
                                         </div>
