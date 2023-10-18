@@ -22,15 +22,15 @@ class PhotoUploadTest extends TestCase
 
         $file = UploadedFile::fake()->image('sunset.jpg');
 
-        $response = $this->actingAs($user)->post('photos', ['photo' => $file]);
+        $response = $this->actingAs($user)->post('api/photos', ['photo' => $file]);
 
         $response->assertCreated();
 
-        Storage::disk()->assertExists($file->hashName('photos'));
+        Storage::disk()->assertExists($file->hashName("photos/$user->id"));
 
         $this->assertDatabaseHas('photos', [
             'user_id' => $user->id,
-            'path' => $file->hashName('photos'),
+            'path' => $file->hashName("photos/$user->id"),
         ]);
     }
 }
