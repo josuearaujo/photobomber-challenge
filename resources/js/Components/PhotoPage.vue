@@ -1,10 +1,10 @@
 <template>
     <div class="flex flex-col items-center justify-center">
-        <div class="h-[400px] w-[400px] bg-white border-b border-gray-200 shadow-lg rounded-md m-auto">
-            <div :class="getGridClass()">
+        <div class="h-[400px] w-[400px] bg-white border-b border-gray-200 shadow-2xl rounded-md m-auto flex justify-center items-center">
+            <div :class="getGridClass()" class="w-[370px]">
                 <div v-for="photo in photos" class="p-1">
-                    <div class="bg-slate-200 flex justify-center items-center w-[100%] h-[100%]">
-                        <strong>{{ photo.id }}</strong>
+                    <div class="flex justify-center items-center w-[100%] h-[100%]">
+                        <img :src="'/photos/' + photo.id" alt="">
                     </div>
                 </div>
             </div>

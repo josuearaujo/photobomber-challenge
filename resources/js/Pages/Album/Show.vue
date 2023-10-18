@@ -60,7 +60,9 @@
 
                 <div class="mb-10">
                     <div class="flex flex-col items-center justify-center">
-                        <div class="h-[400px] w-[400px] bg-white border-b border-gray-200 shadow-lg rounded-md flex justify-center items-center"></div>
+                        <div class="h-[400px] w-[400px] bg-white border-b border-gray-200 shadow-lg rounded-md flex justify-center items-end">
+                            <img src="/logo-icastgo.webp" alt="iCastGo" class="h-[60px]"/>
+                        </div>
                         <span class="text-md mt-1 text-gray-500">Back cover</span>
                     </div>
                 </div>
