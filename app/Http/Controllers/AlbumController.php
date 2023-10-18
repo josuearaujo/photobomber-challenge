@@ -25,13 +25,11 @@ class AlbumController extends Controller
     public function index(): Response
     {
         $user = auth()->user();
-        $token = $user->createToken('all');
 
         $albums = Album::whereUserId($user->id)->with('photos')->orderByDesc('created_at')->get();
 
         return Inertia::render('Album/List', [
             'albums' => $albums,
-            'token' => $token->plainTextToken
         ]);
     }
 
@@ -53,13 +51,11 @@ class AlbumController extends Controller
     public function show(Album $album): Response
     {
         $user = auth()->user();
-        $token = $user->createToken('all');
 
         return Inertia::render('Album/Show', [
             'album' => $album,
             'albumPhotos' => $album->photos,
             'userPhotos' => $user->photos,
-            'token' => $token->plainTextToken,
         ]);
     }
 

@@ -79,8 +79,7 @@ import ImageSquare from "@/Components/ImageSquare.vue";
 import PhotoPage from "@/Components/PhotoPage.vue";
 import Button from "@/Components/Button.vue";
 
-const props = defineProps({album: Object, albumPhotos: Array, userPhotos: Array, token: String});
-axios.defaults.headers.common['Authorization'] = `Bearer ${props.token}`;
+const props = defineProps({album: Object, albumPhotos: Array, userPhotos: Array});
 
 const displayPhotos = [];
 

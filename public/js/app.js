@@ -17313,14 +17313,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'List',
   props: {
-    albums: Array,
-    token: String
+    albums: Array
   },
   setup: function setup(__props, _ref) {
     var __expose = _ref.expose;
     __expose();
     var props = __props;
-    axios__WEBPACK_IMPORTED_MODULE_5__["default"].defaults.headers.common['Authorization'] = "Bearer ".concat(props.token);
     var openCreateForm = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(false);
     var __returned__ = {
       props: props,
@@ -17504,14 +17502,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: {
     album: Object,
     albumPhotos: Array,
-    userPhotos: Array,
-    token: String
+    userPhotos: Array
   },
   setup: function setup(__props, _ref) {
     var __expose = _ref.expose;
     __expose();
     var props = __props;
-    axios__WEBPACK_IMPORTED_MODULE_7__["default"].defaults.headers.common['Authorization'] = "Bearer ".concat(props.token);
     var displayPhotos = [];
     for (var i = 0; i < props.albumPhotos.length; i += props.album.layout) {
       var chunk = props.albumPhotos.slice(i, i + props.album.layout);
@@ -18035,15 +18031,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'List',
   props: {
-    photos: Array,
-    token: String
+    photos: Array
   },
   setup: function setup(__props, _ref) {
     var __expose = _ref.expose;
     __expose();
     var props = __props;
     var fileInputRef = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(null);
-    axios__WEBPACK_IMPORTED_MODULE_4__["default"].defaults.headers.common['Authorization'] = "Bearer ".concat(props.token);
     var openFileInput = function openFileInput() {
       fileInputRef.value.click();
     };

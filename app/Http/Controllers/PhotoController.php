@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use App\Models\Photo;
@@ -13,13 +14,11 @@ class PhotoController extends Controller
     public function index(): Response
     {
         $user = auth()->user();
-        $token = $user->createToken('all');
 
         $photos = Photo::whereUserId($user->id)->orderByDesc('created_at')->get();
 
         return Inertia::render('Gallery/List', [
             'photos' => $photos,
-            'token' => $token->plainTextToken
         ]);
     }
 

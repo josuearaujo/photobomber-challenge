@@ -47,8 +47,7 @@ import AlbumSquare from "@/Components/AlbumSquare.vue";
 import {ref} from "vue";
 import CreateAlbumModal from "@/Pages/Album/Partials/CreateAlbumModal.vue";
 
-const props = defineProps({albums: Array, token: String});
-axios.defaults.headers.common['Authorization'] = `Bearer ${props.token}`;
+const props = defineProps({albums: Array});
 
 const openCreateForm = ref(false);
 </script>

@@ -49,9 +49,7 @@
     import { ref} from "vue";
 
     const fileInputRef = ref(null);
-    const props = defineProps({ photos: Array, token: String });
-
-    axios.defaults.headers.common['Authorization'] = `Bearer ${props.token}`;
+    const props = defineProps({ photos: Array});
 
     const openFileInput = () => {
         fileInputRef.value.click();
