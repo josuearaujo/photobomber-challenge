@@ -45,7 +45,7 @@
                 <div class="mb-10">
                     <div class="flex flex-col items-center justify-center">
                         <div class="h-[400px] w-[400px] bg-white border-b border-gray-200 shadow-lg rounded-md flex justify-center items-center">
-                            <strong class="text-2xl">{{album.title}}</strong>
+                            <strong class="text-xl">{{album.title}}</strong>
                         </div>
                         <span class="text-md mt-1 text-gray-500">Front cover</span>
                     </div>
@@ -72,6 +72,7 @@
 </template>
 
 <script setup>
+import { router } from '@inertiajs/vue3';
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue'
 import { Head } from '@inertiajs/vue3';
 import axios from "axios";
@@ -122,9 +123,9 @@ const handleSelection = async (photo) => {
 
 const handleCompilation = async () => {
     try {
-        const response = await axios.post(route('album.compile', {album: props.album}));
+        await axios.post(route('album.compile', {album: props.album}));
 
-        console.log(response);
+        router.get(route('album.index'));
     } catch (err) {
         console.log('ERROR WHILE COMPILING', err);
     }
