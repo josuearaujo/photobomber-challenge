@@ -48,6 +48,7 @@
                                                         value="1"
                                                         name="layout"
                                                         class="form-radio text-indigo-600"
+                                                        required
                                                     />
                                                     <span class="ml-2">1</span>
                                                 </label>
@@ -58,6 +59,7 @@
                                                         value="2"
                                                         name="layout"
                                                         class="form-radio text-indigo-600"
+                                                        required
                                                     />
                                                     <span class="ml-2">2</span>
                                                 </label>
@@ -68,6 +70,7 @@
                                                         value="4"
                                                         name="layout"
                                                         class="form-radio text-indigo-600"
+                                                        required
                                                     />
                                                     <span class="ml-2">4</span>
                                                 </label>
@@ -90,7 +93,7 @@
 </template>
 
 <script setup>
-import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue';
+import {Dialog, DialogPanel, DialogTitle, RadioGroup, TransitionChild, TransitionRoot} from '@headlessui/vue';
 import { useForm } from '@inertiajs/vue3';
 import {ref} from "vue";
 
