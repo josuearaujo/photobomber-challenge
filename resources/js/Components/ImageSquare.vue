@@ -17,7 +17,7 @@
 <script setup>
     import {ref} from "vue";
 
-    const {imgId} = defineProps({imgId: Number});
+    const {imgId} = defineProps({imgId: Number, hasDelete: Boolean});
     const emit = defineEmits(['deletePhoto']);
 
     const hover = ref(false);

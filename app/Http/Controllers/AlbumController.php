@@ -59,9 +59,11 @@ class AlbumController extends Controller
         ]);
     }
 
-    public function destroy(int $id)
+    public function destroy(Album $album): Application|\Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|ResponseFactory
     {
+        $album->delete();
 
+        return response(["deleted" => true], 200);
     }
 
     public function addPhoto(Album $album, Photo $photo): \Illuminate\Contracts\Foundation\Application|ResponseFactory|Application|\Illuminate\Http\Response

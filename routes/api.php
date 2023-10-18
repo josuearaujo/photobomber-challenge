@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/photos', UploadPhotoController::class);
     Route::delete('/photos/{photo}', [PhotoController::class, 'destroy'])->name('photo.destroy');
 
+    Route::delete('/albums/{album}}', [AlbumController::class, 'destroy'])->name('album.destroy');
     Route::post('/albums/{album}/photos/{photo}', [AlbumController::class, 'addPhoto'])->name('album.add-photo');
     Route::delete('/albums/{album}/photos/{photo}', [AlbumController::class, 'removePhoto'])->name('album.remove-photo');
     Route::post('/albums/compile/{album}', [AlbumController::class, 'compile'])->name('album.compile');

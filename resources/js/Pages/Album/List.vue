@@ -29,7 +29,7 @@
                         </div>
                         <div class="grid grid-cols-3 gap-5 items-stretch justify-items-center">
                             <template v-for="album in albums">
-                                <AlbumSquare :album="album"/>
+                                <AlbumSquare :album="album" @deleteAlbum="deleteAlbum"/>
                             </template>
                         </div>
                     </div>
@@ -42,12 +42,22 @@
 <script setup>
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue'
 import { Head } from '@inertiajs/vue3';
-import axios from "axios";
 import AlbumSquare from "@/Components/AlbumSquare.vue";
 import {ref} from "vue";
 import CreateAlbumModal from "@/Pages/Album/Partials/CreateAlbumModal.vue";
+import axios from "axios";
 
 const props = defineProps({albums: Array});
+
+const deleteAlbum = async (albumId) => {
+    try{
+        await axios.delete(route('album.destroy', {album: albumId}));
+        const idx = props.albums.findIndex(album => album.id === albumId);
+        props.albums.splice(idx, 1);
+    } catch (err) {
+        console.log('ERROR WHILE DELETING ALBUM!');
+    }
+}
 
 const openCreateForm = ref(false);
 </script>

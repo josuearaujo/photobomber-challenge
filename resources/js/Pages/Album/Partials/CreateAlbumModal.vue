@@ -103,7 +103,6 @@ const formData = useForm({
 });
 
 const submitForm = async () => {
-    const response = await formData.post('/albums');
-    console.log('Finalizou!', response);
+    await formData.post('/albums');
 };
 </script>
