@@ -5,14 +5,23 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAlbumRequest;
 use App\Models\Album;
 use App\Models\Photo;
+use App\Services\AlbumCompiler;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class AlbumController extends Controller
 {
+    private AlbumCompiler $albumCompiler;
+
+    public function __construct(AlbumCompiler $albumCompiler)
+    {
+        $this->albumCompiler = $albumCompiler;
+    }
+
     public function index(): Response
     {
         $user = auth()->user();
@@ -38,7 +47,7 @@ class AlbumController extends Controller
             'layout' => data_get($validated, 'layout')
         ]);
 
-        return redirect()->route('album.show', ['id' => $album->id]);
+        return redirect()->route('album.show', ['album' => $album]);
     }
 
     public function show(Album $album): Response
@@ -73,10 +82,10 @@ class AlbumController extends Controller
         return response(["albumId" => $album->id, 'photoId' => $photo->id, "deleted" => true], 200);
     }
 
-//    public function compile(int $albumId)
-//    {
-//        Album::whereId($albumId);
-//
-//        return response(["albumId" => $albumId, 'photoId' => $photoId, "deleted" => true], 200);
-//    }
+    public function compile(Album $album): void
+    {
+        Log::warning('Trying to dispatch compilation' . json_encode($album));
+
+        $this->albumCompiler->compile($album);
+    }
 }

@@ -4,20 +4,16 @@
 
     <BreezeAuthenticatedLayout>
         <div v-if="openSelectPhotos" class="absolute left-[10%] w-[80%] h-[90%] z-50 shadow-xl bg-white">
-<!--            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">-->
-<!--                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">-->
-                    <div class="p-10">
-                        <div v-if="!userPhotos.length" class="flex justify-center">
-                            <span> There is nothing here yet! Please upload your first photo! </span>
-                        </div>
-                        <div class="grid grid-cols-3 gap-5 items-stretch justify-items-center">
-                            <template v-for="photo in userPhotos">
-                                <ImageSquare :imgId="photo.id" @click="handleSelection(photo)"/>
-                            </template>
-                        </div>
-                    </div>
-<!--                </div>-->
-<!--            </div>-->
+            <div class="p-10">
+                <div v-if="!userPhotos.length" class="flex justify-center">
+                    <span> There is nothing here yet! Please upload your first photo! </span>
+                </div>
+                <div class="grid grid-cols-3 gap-5 items-stretch justify-items-center">
+                    <template v-for="photo in userPhotos">
+                        <ImageSquare :imgId="photo.id" @click="handleSelection(photo)"/>
+                    </template>
+                </div>
+            </div>
         </div>
 
         <template #header>
@@ -25,6 +21,8 @@
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                     Album
                 </h2>
+
+                <Button v-if="albumPhotos.length" @click="handleCompilation">Compile</Button>
 
                 <div class="px-2 cursor-pointer rounded-sm hover:duration-500 hover:shadow-lg hover:bg-slate-100 flex items-center"
                      @click="openSelectPhotos=true"
@@ -60,21 +58,6 @@
                     </div>
                 </template>
 
-<!--                <div class="mb-10 flex">-->
-<!--                    <PhotoPage :photos="displayPhotos[2]" :layout="album.layout"/>-->
-<!--                    <PhotoPage :photos="displayPhotos[3]" :layout="album.layout"/>-->
-<!--                </div>-->
-
-<!--                <div class="mb-10 flex">-->
-<!--                    <PhotoPage :photos="displayPhotos[4]" :layout="album.layout"/>-->
-<!--                    <PhotoPage :photos="displayPhotos[5]" :layout="album.layout"/>-->
-<!--                </div>-->
-
-<!--                <div class="mb-10 flex">-->
-<!--                    <PhotoPage :photos="displayPhotos[6]" :layout="album.layout"/>-->
-<!--                    <PhotoPage :photos="displayPhotos[7]" :layout="album.layout"/>-->
-<!--                </div>-->
-
                 <div class="mb-10">
                     <div class="flex flex-col items-center justify-center">
                         <div class="h-[400px] w-[400px] bg-white border-b border-gray-200 shadow-lg rounded-md flex justify-center items-center"></div>
@@ -94,8 +77,10 @@ import AlbumInformation from "@/Pages/Album/Partials/AlbumInformation.vue";
 import {ref} from "vue";
 import ImageSquare from "@/Components/ImageSquare.vue";
 import PhotoPage from "@/Components/PhotoPage.vue";
+import Button from "@/Components/Button.vue";
 
 const props = defineProps({album: Object, albumPhotos: Array, userPhotos: Array, token: String});
+axios.defaults.headers.common['Authorization'] = `Bearer ${props.token}`;
 
 const displayPhotos = [];
 
@@ -128,5 +113,13 @@ const handleSelection = async (photo) => {
     }
 }
 
-axios.defaults.headers.common['Authorization'] = `Bearer ${props.token}`;
+const handleCompilation = async () => {
+    try {
+        const response = await axios.post(route('album.compile', {album: props.album}));
+
+        console.log(response);
+    } catch (err) {
+        console.log('ERROR WHILE COMPILING', err);
+    }
+}
 </script>
