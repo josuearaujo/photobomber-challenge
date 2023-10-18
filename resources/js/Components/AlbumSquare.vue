@@ -28,7 +28,5 @@
 
     const {album} = defineProps({album: Object});
 
-    console.log(album);
-
     const hover = ref(false);
 </script>
