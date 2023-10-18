@@ -1,5 +1,5 @@
 <template>
-    <div class="relative" @mouseover="hover=true" @mouseleave="hover=false">
+    <div class="relative w-[100%]" @mouseover="hover=true" @mouseleave="hover=false">
         <div v-if="hover" class="absolute right-0 top-0 cursor-pointer p-2 bg-slate-100 shadow-md rounded-full z-60" @click="emit('deleteAlbum', album.id)">
             <svg width="24px" height="24px" viewBox="0 0 24 24" class="fill-red-400">
                 <path d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13zM9 8h2v9H9zm4 0h2v9h-2z"></path>
@@ -29,8 +29,6 @@
             </div>
         </Link>
     </div>
-
-
 </template>
 
 <script setup>

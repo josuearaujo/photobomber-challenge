@@ -3,14 +3,14 @@
     <div v-if="openSelectPhotos" @click="openSelectPhotos=false" class="absolute w-[100%] h-[100%] z-20 bg-slate-50 opacity-70"></div>
 
     <BreezeAuthenticatedLayout>
-        <div v-if="openSelectPhotos" class="absolute left-[10%] w-[80%] h-[90%] z-50 shadow-xl bg-white">
+        <div v-if="openSelectPhotos" class="absolute left-[10%] w-[80%] h-[90%] z-50 shadow-xl bg-white overflow-y-auto">
             <div class="p-10">
                 <div v-if="!userPhotos.length" class="flex justify-center">
                     <span> There is nothing here yet! Please upload your first photo! </span>
                 </div>
                 <div class="grid grid-cols-3 gap-5 items-stretch justify-items-center">
                     <template v-for="photo in userPhotos">
-                        <ImageSquare :imgId="photo.id" @click="handleSelection(photo)"/>
+                        <SelectPhoto :imgId="photo.id" @click="handleSelection(photo)" :isSelected="isSelected(photo.id)"/>
                     </template>
                 </div>
             </div>
@@ -75,9 +75,9 @@ import { Head } from '@inertiajs/vue3';
 import axios from "axios";
 import AlbumInformation from "@/Pages/Album/Partials/AlbumInformation.vue";
 import {ref} from "vue";
-import ImageSquare from "@/Components/ImageSquare.vue";
 import PhotoPage from "@/Components/PhotoPage.vue";
 import Button from "@/Components/Button.vue";
+import SelectPhoto from "@/Components/SelectPhoto.vue";
 
 const props = defineProps({album: Object, albumPhotos: Array, userPhotos: Array});
 
@@ -89,6 +89,12 @@ for (let i = 0; i < props.albumPhotos.length; i += props.album.layout) {
 }
 
 const openSelectPhotos = ref(false);
+
+const isSelected = (photoId) => {
+    const idx = props.albumPhotos.findIndex(albumPhoto => albumPhoto.id === photoId);
+
+    return idx !== -1;
+}
 
 const handleSelection = async (photo) => {
     try {
