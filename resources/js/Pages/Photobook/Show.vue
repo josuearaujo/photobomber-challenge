@@ -45,27 +45,42 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col justify-center items-center">
 
                 <div class="mb-10">
-                    <div class="h-[400px] w-[400px] bg-white border-b border-gray-200 shadow-lg rounded-md flex justify-center items-center">
-                        <strong class="text-2xl">{{album.title}}</strong>
+                    <div class="flex flex-col items-center justify-center">
+                        <div class="h-[400px] w-[400px] bg-white border-b border-gray-200 shadow-lg rounded-md flex justify-center items-center">
+                            <strong class="text-2xl">{{album.title}}</strong>
+                        </div>
+                        <span class="text-md mt-1 text-gray-500">Front cover</span>
                     </div>
                 </div>
 
-                <div class="mb-10 flex">
-                    <div class="h-[400px] w-[400px] bg-white border-b border-gray-200 shadow-lg rounded-md flex justify-center items-center">
-                        <strong class="text-2xl">{{album.title}}</strong>
+                <template v-for="group in Math.ceil(displayPhotos.length/2)">
+                    <div class="mb-10 flex">
+                        <PhotoPage :photos="displayPhotos[(group-1)*2]" :layout="album.layout" :pageNumber="(group-1)*2"/>
+                        <PhotoPage v-if="displayPhotos[(group-1)*2+1]" :photos="displayPhotos[(group-1)*2+1]" :layout="album.layout" :pageNumber="(group-1)*2+1"/>
                     </div>
-                    <div class="h-[400px] w-[400px] bg-white border-b border-gray-200 shadow-lg rounded-md flex justify-center items-center">
-                        <strong class="text-2xl">{{album.title}}</strong>
+                </template>
+
+<!--                <div class="mb-10 flex">-->
+<!--                    <PhotoPage :photos="displayPhotos[2]" :layout="album.layout"/>-->
+<!--                    <PhotoPage :photos="displayPhotos[3]" :layout="album.layout"/>-->
+<!--                </div>-->
+
+<!--                <div class="mb-10 flex">-->
+<!--                    <PhotoPage :photos="displayPhotos[4]" :layout="album.layout"/>-->
+<!--                    <PhotoPage :photos="displayPhotos[5]" :layout="album.layout"/>-->
+<!--                </div>-->
+
+<!--                <div class="mb-10 flex">-->
+<!--                    <PhotoPage :photos="displayPhotos[6]" :layout="album.layout"/>-->
+<!--                    <PhotoPage :photos="displayPhotos[7]" :layout="album.layout"/>-->
+<!--                </div>-->
+
+                <div class="mb-10">
+                    <div class="flex flex-col items-center justify-center">
+                        <div class="h-[400px] w-[400px] bg-white border-b border-gray-200 shadow-lg rounded-md flex justify-center items-center"></div>
+                        <span class="text-md mt-1 text-gray-500">Back cover</span>
                     </div>
                 </div>
-
-                <div class="mb-10 flex">
-                    <div class="h-[400px] w-[400px] bg-white border-b border-gray-200 shadow-lg rounded-md flex justify-center items-center">
-                        <strong class="text-2xl">{{album.title}}</strong>
-                    </div>
-                </div>
-
-
             </div>
         </div>
     </BreezeAuthenticatedLayout>
@@ -78,8 +93,18 @@ import axios from "axios";
 import AlbumInformation from "@/Pages/Photobook/Partials/AlbumInformation.vue";
 import {ref} from "vue";
 import ImageSquare from "@/Components/ImageSquare.vue";
+import PhotoPage from "@/Components/PhotoPage.vue";
 
 const props = defineProps({album: Object, albumPhotos: Array, userPhotos: Array, token: String});
+
+const displayPhotos = [];
+
+for (let i = 0; i < props.albumPhotos.length; i += props.album.layout) {
+    const chunk = props.albumPhotos.slice(i, i + props.album.layout);
+    displayPhotos.push(chunk);
+}
+
+console.log(props.albumPhotos, displayPhotos);
 
 const openSelectPhotos = ref(false);
 
@@ -96,6 +121,11 @@ const handleSelection = async (photo) => {
         }
     } catch(err) {
         console.log('ERROR WHILE DELETING OR ADDING ALBUM PHOTO!');
+    } finally {
+        for (let i = 0; i < props.albumPhotos.length; i += props.album.layout) {
+            const chunk = props.albumPhotos.slice(i, i + props.album.layout);
+            displayPhotos.push(chunk);
+        }
     }
 }
 
