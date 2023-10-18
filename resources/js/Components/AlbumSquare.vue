@@ -23,7 +23,7 @@
                     </div>
                     <div class="flex flex-col items-center">
                         <span class="text-xs">Status</span>
-                        <span>TBD</span>
+                        <span>{{toUpperCase(album.status)}}</span>
                     </div>
                 </div>
             </div>
@@ -34,6 +34,7 @@
 <script setup>
     import {Link} from "@inertiajs/vue3";
     import {ref} from "vue";
+    import {toUpperCase} from "uri-js/dist/esnext/util";
 
     const hover = ref(false);
     const emit = defineEmits(['deleteAlbum']);
