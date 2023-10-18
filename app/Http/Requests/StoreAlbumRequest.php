@@ -16,7 +16,7 @@ class StoreAlbumRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|max:50',
+            'title' => 'required|max:20',
             'description' => 'max:255',
             'layout' => Rule::in([1,2, 4])
         ];
