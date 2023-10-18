@@ -12,7 +12,7 @@
                             <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                                 <DialogTitle as="h3" class="text-base font-semibold leading-6 text-gray-900">Create album</DialogTitle>
                                 <div class="container mx-auto p-6">
-                                    <form @submit.prevent="submitForm">
+                                    <form @submit.prevent="submitForm" id="album">
                                         <div class="mb-4">
                                             <label for="title" class="block text-gray-600">Title</label>
                                             <input
@@ -73,21 +73,14 @@
                                                 </label>
                                             </div>
                                         </div>
-
-                                        <div>
-                                            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                                                Submit
-                                            </button>
-                                        </div>
                                     </form>
                                 </div>
                             </div>
-<!--                            <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">-->
-<!--                                <button type="button" class="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto" @click="open = false">-->
-<!--                                    Create-->
-<!--                                </button>-->
-<!--                                <button type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto" @click="open = false" ref="cancelButtonRef">Cancel</button>-->
-<!--                            </div>-->
+                            <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                                <button type="submit" form="album" class="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto">
+                                    Create
+                                </button>
+                            </div>
                         </DialogPanel>
                     </TransitionChild>
                 </div>
