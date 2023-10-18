@@ -103,7 +103,7 @@ const formData = useForm({
 });
 
 const submitForm = async () => {
-    const response = await formData.post('/photobooks');
+    const response = await formData.post('/albums');
     console.log('Finalizou!', response);
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <Head title="Photobook" />
+    <Head title="Album" />
     <div v-if="openSelectPhotos" @click="openSelectPhotos=false" class="absolute w-[100%] h-[100%] z-20 bg-slate-50 opacity-70"></div>
 
     <BreezeAuthenticatedLayout>
@@ -23,7 +23,7 @@
         <template #header>
             <div class="flex justify-between items-center">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Photobook
+                    Album
                 </h2>
 
                 <div class="px-2 cursor-pointer rounded-sm hover:duration-500 hover:shadow-lg hover:bg-slate-100 flex items-center"
@@ -90,7 +90,7 @@
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue'
 import { Head } from '@inertiajs/vue3';
 import axios from "axios";
-import AlbumInformation from "@/Pages/Photobook/Partials/AlbumInformation.vue";
+import AlbumInformation from "@/Pages/Album/Partials/AlbumInformation.vue";
 import {ref} from "vue";
 import ImageSquare from "@/Components/ImageSquare.vue";
 import PhotoPage from "@/Components/PhotoPage.vue";
@@ -103,8 +103,6 @@ for (let i = 0; i < props.albumPhotos.length; i += props.album.layout) {
     const chunk = props.albumPhotos.slice(i, i + props.album.layout);
     displayPhotos.push(chunk);
 }
-
-console.log(props.albumPhotos, displayPhotos);
 
 const openSelectPhotos = ref(false);
 
@@ -122,6 +120,7 @@ const handleSelection = async (photo) => {
     } catch(err) {
         console.log('ERROR WHILE DELETING OR ADDING ALBUM PHOTO!');
     } finally {
+        displayPhotos.splice(0, displayPhotos.length);
         for (let i = 0; i < props.albumPhotos.length; i += props.album.layout) {
             const chunk = props.albumPhotos.slice(i, i + props.album.layout);
             displayPhotos.push(chunk);

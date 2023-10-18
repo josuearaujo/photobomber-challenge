@@ -1,11 +1,11 @@
 <template>
-    <Head title="Photobook" />
+    <Head title="Albums" />
 
     <BreezeAuthenticatedLayout>
         <template #header>
             <div class="flex justify-between">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Photobook
+                    Albums
                 </h2>
 
                 <div class="px-2 cursor-pointer rounded-sm hover:duration-500 hover:shadow-lg hover:bg-slate-100 flex items-center"
@@ -45,7 +45,7 @@ import { Head } from '@inertiajs/vue3';
 import axios from "axios";
 import AlbumSquare from "@/Components/AlbumSquare.vue";
 import {ref} from "vue";
-import CreateAlbumModal from "@/Pages/Photobook/Partials/CreateAlbumModal.vue";
+import CreateAlbumModal from "@/Pages/Album/Partials/CreateAlbumModal.vue";
 
 const props = defineProps({albums: Array, token: String});
 axios.defaults.headers.common['Authorization'] = `Bearer ${props.token}`;

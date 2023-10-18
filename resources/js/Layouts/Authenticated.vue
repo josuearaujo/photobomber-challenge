@@ -27,8 +27,8 @@
                             </div>
 
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <BreezeNavLink :href="route('photobook.index')" :active="route().current('photobook.index')">
-                                    Photobook
+                                <BreezeNavLink :href="route('album.index')" :active="route().current('album.index')">
+                                    Albums
                                 </BreezeNavLink>
                             </div>
                         </div>

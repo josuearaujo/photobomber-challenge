@@ -23,19 +23,15 @@ class PhotoController extends Controller
         ]);
     }
 
-    public function show(int $id): BinaryFileResponse
+    public function show(Photo $photo): BinaryFileResponse
     {
-        $photo = Photo::whereId($id)->first();
-
         $filePath = Storage::path($photo->path);
 
         return response()->file($filePath);
     }
 
-    public function destroy(int $id): Response
+    public function destroy(Photo $photo): Response
     {
-        $photo = Photo::whereId($id)->first();
-
         Storage::delete($photo->path);
         $photo->delete();
 
