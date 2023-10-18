@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAlbumRequest;
 use App\Models\Album;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -30,23 +31,24 @@ class AlbumController extends Controller
         $user = auth()->user();
 
         $album = $user->albums()->create([
-            'title' => $validated->title,
-            'description' => $validated->description,
-            'layout' => $validated->layout
+            'title' => data_get($validated, 'title'),
+            'description' => data_get($validated, 'description'),
+            'layout' => data_get($validated, 'layout')
         ]);
 
         return redirect()->route('photobook.show', ['id' => $album->id]);
     }
 
-    public function show(Album $album): Response
+    public function show(int $id): Response
     {
+        $album = Album::whereId($id)->first();
         $user = auth()->user();
         $token = $user->createToken('all');
 
-        return Inertia::render('Album/Show', [
+        return Inertia::render('Photobook/Show', [
             'album' => $album,
             'photos' => $album->photos,
-            'token' => $token,
+            'token' => $token->plainTextToken,
         ]);
     }
 
