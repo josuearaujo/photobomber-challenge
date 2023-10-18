@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('albums', function ($table) {
-            $table->integer('layout')->after('description');
+            $table->integer('layout')->after('description')->default(1);
         });
     }
 
