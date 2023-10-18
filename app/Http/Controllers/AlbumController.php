@@ -8,6 +8,7 @@ use App\Models\Photo;
 use App\Services\AlbumCompiler;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
@@ -48,9 +49,13 @@ class AlbumController extends Controller
         return redirect()->route('album.show', ['album' => $album]);
     }
 
-    public function show(Album $album): Response
+    public function show(Album $album): RedirectResponse|Response
     {
         $user = auth()->user();
+
+        if($album->status !== 'draw'){
+            return redirect()->route('album.index')->with(['message' => 'Album is not a draw!', 'type' => 'error']);
+        }
 
         return Inertia::render('Album/Show', [
             'album' => $album,
@@ -80,10 +85,13 @@ class AlbumController extends Controller
         return response(["albumId" => $album->id, 'photoId' => $photo->id, "deleted" => true], 200);
     }
 
-    public function compile(Album $album): void
+    public function compile(Album $album): JsonResponse
     {
-        Log::warning('Trying to dispatch compilation' . json_encode($album));
+        $album->status = 'pending';
+        $album->save();
 
         $this->albumCompiler->compile($album);
+
+        return response()->json(['message' => 'Compilation started']);
     }
 }
