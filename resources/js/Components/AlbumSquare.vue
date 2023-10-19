@@ -5,7 +5,7 @@
                 <path d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13zM9 8h2v9H9zm4 0h2v9h-2z"></path>
             </svg>
         </div>
-        <Link :href="route('album.show', {album: album.id})" class="h-[400px] w-[100%] flex flex-col items-center shadow-lg"
+        <Link :href="url" class="h-[400px] w-[100%] flex flex-col items-center shadow-lg" :class="!url ? 'cursor-not-allowed' : ''"
         >
             <div class="w-[80%] h-[70%] mt-[5%] flex justify-center items-center">
                 <img v-if="album.photos.length" :src="'/photos/' + album.photos[0]?.id" alt=""/>
@@ -35,9 +35,31 @@
     import {Link} from "@inertiajs/vue3";
     import {ref} from "vue";
     import {toUpperCase} from "uri-js/dist/esnext/util";
+    import axios from "axios";
+    import Swal from "sweetalert2";
+
+    const {album} = defineProps({album: Object});
+
+    const url = ['draw','failed'].includes(album.status) ? route('album.show', {album: album.id}) : '';
+
+    let timer = undefined;
+
+    if(album.status === 'pending'){
+        timer = setInterval(async () => {
+            const response = await axios.get(route('album.check-compilation', {album: album.id}));
+            if(response.data.status !== 'pending') {
+                clearInterval(timer);
+                album.status = response.data.status;
+
+                await Swal.fire({
+                    title: `${album.title} ${response.data.status}`,
+                    text: response.data.status === 'failed' ? response.data.message : '',
+                    timer: 5000
+                })
+            }
+        }, 10000)
+    }
 
     const hover = ref(false);
     const emit = defineEmits(['deleteAlbum']);
-
-    defineProps({album: Object});
 </script>
