@@ -40,7 +40,9 @@
 
     const {album} = defineProps({album: Object});
 
-    const url = ['draw','failed'].includes(album.status) ? route('album.show', {album: album.id}) : '';
+    const url = ref('');
+
+    url.value = ['draw','failed'].includes(album.status) ? route('album.show', {album: album.id}) : '';
 
     let timer = undefined;
 
@@ -50,6 +52,7 @@
             if(response.data.status !== 'pending') {
                 clearInterval(timer);
                 album.status = response.data.status;
+                url.value = ['draw','failed'].includes(album.status) ? route('album.show', {album: album.id}) : '';
 
                 await Swal.fire({
                     title: `${album.title} ${response.data.status}`,
