@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/albums/{album}/photos/{photo}', [AlbumController::class, 'addPhoto'])->name('album.add-photo');
     Route::delete('/albums/{album}/photos/{photo}', [AlbumController::class, 'removePhoto'])->name('album.remove-photo');
     Route::post('/albums/compile/{album}', [AlbumController::class, 'compile'])->name('album.compile');
+    Route::get('/album/compile/{album}', [AlbumController::class, 'checkCompilation'])->name('album.check-compilation');
 });
 
 Route::post('/webhooks/compilation', AlbumCompilationWebhookController::class);
