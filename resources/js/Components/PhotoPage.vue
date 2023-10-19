@@ -4,7 +4,7 @@
             <div :class="getGridClass()" class="w-[370px]">
                 <div v-for="photo in photos" class="p-1">
                     <div class="flex justify-center items-center w-[100%] h-[100%]">
-                        <img :src="'/photos/' + photo.id" alt="">
+                        <img :src="'/photos/' + photo.id" alt="" class="max-h-[100%]">
                     </div>
                 </div>
             </div>
