@@ -1,3 +1,5 @@
+Please review my implementation notes [here](NOTES.md).
+
 <p align="center"><img src="https://webcasting.digicast.ca/hubfs/Assets-Do-Not-Remove/C02%20-%20Footer/logo-icastgo-footer.png" alt="icastGo logo"></p>
 <p align="center">
 <font size="2">Research and Development Team</font>
