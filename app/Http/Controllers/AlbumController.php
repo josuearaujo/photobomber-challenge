@@ -53,7 +53,7 @@ class AlbumController extends Controller
     {
         $user = auth()->user();
 
-        if($album->status !== 'draw'){
+        if(in_array($album->status, ['pending', 'finished'])){
             return redirect()->route('album.index')->with(['message' => 'Album is not a draw!', 'type' => 'error']);
         }
 
@@ -93,5 +93,14 @@ class AlbumController extends Controller
         $this->albumCompiler->compile($album);
 
         return response()->json(['message' => 'Compilation started']);
+    }
+
+    public function checkCompilation(Album $album): JsonResponse
+    {
+        if($album->status === 'pending') {
+            return response()->json(['status' => $album->status]);
+        } else {
+            return response()->json(['status' => $album->status, 'message' => $album->error_message]);
+        }
     }
 }
