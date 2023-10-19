@@ -88,6 +88,7 @@ class AlbumController extends Controller
     public function compile(Album $album): JsonResponse
     {
         $album->status = 'pending';
+        $album->error_message = null;
         $album->save();
 
         $this->albumCompiler->compile($album);
