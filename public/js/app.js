@@ -16840,7 +16840,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var timer = undefined;
     if (album.status === 'pending') {
       timer = setInterval( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var response;
+        var response, icon, text;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
@@ -16851,7 +16851,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 2:
               response = _context.sent;
               if (!(response.data.status !== 'pending')) {
-                _context.next = 9;
+                _context.next = 11;
                 break;
               }
               clearInterval(timer);
@@ -16859,13 +16859,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               url.value = ['draw', 'failed'].includes(album.status) ? route('album.show', {
                 album: album.id
               }) : '';
-              _context.next = 9;
+              icon = response.data.status === 'failed' ? 'error' : 'success';
+              text = response.data.message ? "Compilation ".concat(response.data.status, ": ").concat(response.data.message) : "Compilation ".concat(response.data.status);
+              _context.next = 11;
               return sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
-                title: "".concat(album.title, " ").concat(response.data.status),
-                text: response.data.status === 'failed' ? response.data.message : '',
-                timer: 5000
+                title: album.title,
+                text: text,
+                icon: icon,
+                timer: 8000
               });
-            case 9:
+            case 11:
             case "end":
               return _context.stop();
           }

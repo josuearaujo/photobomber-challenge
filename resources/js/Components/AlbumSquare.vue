@@ -54,10 +54,17 @@
                 album.status = response.data.status;
                 url.value = ['draw','failed'].includes(album.status) ? route('album.show', {album: album.id}) : '';
 
+                const icon = response.data.status === 'failed' ? 'error' : 'success';
+
+                const text = response.data.message ?
+                                `Compilation ${response.data.status}: ${response.data.message}` :
+                                `Compilation ${response.data.status}`;
+
                 await Swal.fire({
-                    title: `${album.title} ${response.data.status}`,
-                    text: response.data.status === 'failed' ? response.data.message : '',
-                    timer: 5000
+                    title: album.title,
+                    text,
+                    icon,
+                    timer: 8000
                 })
             }
         }, 10000)
