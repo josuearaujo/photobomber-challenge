@@ -26,11 +26,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-
-    return Inertia::render('Dashboard', );
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/photos', [PhotoController::class, 'index'])->name('photo.index');
     Route::get('/photos/{photo}', [PhotoController::class, 'show'])->name('photo.show');
