@@ -33,7 +33,7 @@
 
 <script setup>
     import {Link} from "@inertiajs/vue3";
-    import {ref} from "vue";
+    import {onUnmounted, ref} from "vue";
     import {toUpperCase} from "uri-js/dist/esnext/util";
     import axios from "axios";
     import Swal from "sweetalert2";
@@ -69,6 +69,10 @@
             }
         }, 10000)
     }
+
+    onUnmounted(() => {
+       clearInterval(timer);
+    });
 
     const hover = ref(false);
     const emit = defineEmits(['deleteAlbum']);

@@ -16875,6 +16875,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       })), 10000);
     }
+    (0,vue__WEBPACK_IMPORTED_MODULE_1__.onUnmounted)(function () {
+      clearInterval(timer);
+    });
     var hover = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(false);
     var __returned__ = {
       url: url,
@@ -16889,6 +16892,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       get Link() {
         return _inertiajs_vue3__WEBPACK_IMPORTED_MODULE_0__.Link;
       },
+      onUnmounted: vue__WEBPACK_IMPORTED_MODULE_1__.onUnmounted,
       ref: vue__WEBPACK_IMPORTED_MODULE_1__.ref,
       get toUpperCase() {
         return uri_js_dist_esnext_util__WEBPACK_IMPORTED_MODULE_2__.toUpperCase;
