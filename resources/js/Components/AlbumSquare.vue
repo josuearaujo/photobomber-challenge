@@ -8,7 +8,7 @@
         <Link :href="url" class="h-[400px] w-[100%] flex flex-col items-center shadow-lg" :class="!url ? 'cursor-not-allowed' : ''"
         >
             <div class="w-[80%] h-[70%] mt-[5%] flex justify-center items-center">
-                <img v-if="album.photos.length" :src="'/photos/' + album.photos[0]?.id" alt=""/>
+                <img v-if="album.photos.length" :src="'/photos/' + album.photos[0]?.id" alt="" class="max-h-[100%]"/>
                 <img v-else src="/NoPhoto.png" alt="No photo"/>
             </div>
             <div class="h-[20%] w-[80%] mt-1 flex flex-col justify-center items-center">
